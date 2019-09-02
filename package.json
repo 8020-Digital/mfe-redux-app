@@ -19,7 +19,7 @@
   "scripts": {
     "start": "PORT=3001 react-scripts start ",
     "build": "react-scripts build",
-    "production": "react-scripts build && pm2 serve -s build"
+    "production": "react-scripts build && pm2 serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
