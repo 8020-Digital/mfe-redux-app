@@ -1,25 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import { Router } from 'react-router'
+import { createBrowserHistory } from 'history'
+import { Route, Switch, Link } from 'react-router-dom'
+
 import './App.css';
 
-function App() {
+const route2 = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h3>Route 2 do browser</h3>
+
+      <button>
+        <Link to="/route3">
+          Navigate to router 3 of browser
+        </Link>
+      </button>
     </div>
+  )
+}
+
+const route3 = (props) => {
+  const { history } = props
+  return (
+    <div>
+      <h3>Route 3 do Browser</h3>
+      <button onClick={() => { history.replace("/") }}>Navigate to Home</button>
+      <button onClick={() => { history.goBack() }}>Back</button>
+      <button onClick={() => { history.push("/route4") }}>Navigate to Route 4</button>
+
+    </div>
+  )
+}
+
+function App(props) {
+  let history = props.history || createBrowserHistory()
+  return (
+    <Router history={history} >
+      <Switch>
+        <Route exact path="/" component={() => <div><h3>Index do Browser</h3></div>} />
+        <Route exact path="/route1" component={() => <div><h3>Route 1 do Browser</h3></div>} />
+        <Route exact path="/route2" component={route2} />
+        <Route exact path="/route3" component={route3} />
+        <Route exact path="/route4" component={() => <div><h3>Route 4 do Browser </h3></div>} />
+      </Switch>
+    </Router>
   );
 }
 
